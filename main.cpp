@@ -5,6 +5,6 @@
 #include <iostream>
 
 int main(){
-    std::cout << "bonjour mathéo";
+    std::cout << "bonjour mathéo\n";
     return 0;
 }
