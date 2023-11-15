@@ -3,8 +3,9 @@
 //
 
 #include <Windows.h>
+#include <iostream>
 
 int main(){
-
+    std::cout << "bonjours";
     return 0;
 }
