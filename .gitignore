@@ -3,3 +3,4 @@ cmake-build-debug/
 main.exe/
 .vscode/tasks.json
 .vscode/launch.json
+cmake-build-debug-mingw-gcc/
