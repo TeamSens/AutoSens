@@ -8,10 +8,11 @@ int main(){
 
     int CurrentGame;
     int NewGame;
-    int DPI;
-
+    float CurrentGame_sens;
+    float NewGame_sens;
+    float Target_sens;
     std::cout << "Hello, What game sensitivity reference would you like to use?" << std::endl;
-    std::cout << "1. Minecraft" << std::endl;
+    std::cout << "1. Minecraft" << std::endl; // mc sens is 22 times csgo's and apex's
     std::cout << "2. Csgo" << std::endl;
     std::cout << "3. Apex Legends" << std::endl;
     std::cout << ">> ";
@@ -32,13 +33,6 @@ int main(){
         std::cout << "Input is incorrect" << std::endl;
         return 1;
     }
-
-    // get dpi
-
-    std::cout << "Please enter your DPI:" << std::endl;
-    std::cout << ">> ";
-
-    std::cin >> DPI;
 
     // treat input
 
