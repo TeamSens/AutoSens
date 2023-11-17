@@ -10,6 +10,7 @@ class games {
 public:
     float sensitivity;
     float fov;
+    void GetGameSensitivity();
 };
 
 
