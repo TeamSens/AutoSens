@@ -7,19 +7,26 @@
 
 bool ui::GetUserNeeds(){
 
-    std::cout << "Hello, What game sensitivity reference would you like to use?" << std::endl;
-    std::cout << "1. Minecraft" << std::endl; // mc sens is 22 times csgo's and apex's
-    std::cout << "2. Csgo/cs2" << std::endl;
-    std::cout << "3. Apex Legends" << std::endl;
-    std::cout << ">> ";
+    std::cout << "Hello, What game sensitivity reference would you like to use?\n";
+    std::cout << "1. Minecraft\n"; // mc sens is 22 times csgo's and apex's
+    std::cout << "2. Csgo/cs2\n";
+    std::cout << "3. Apex Legends\n";
+    std::cout << "\n\n>> ";
 
     std::cin >> CurrentGame;
 
-    std::cout << "What would you like to transfer your sensitivity to?" << std::endl;
-    std::cout << "1. Minecraft" << std::endl;
-    std::cout << "2. Csgo/cs2" << std::endl;
-    std::cout << "3. Apex Legends" << std::endl;
-    std::cout << ">> ";
+#ifdef _WIN32
+    system("cls");
+#elif __APPLE__
+    system("clear");
+#endif
+
+
+    std::cout << "What would you like to transfer your sensitivity to?\n";
+    std::cout << "1. Minecraft\n";
+    std::cout << "2. Csgo/cs2\n";
+    std::cout << "3. Apex Legends\n";
+    std::cout << "\n\n>> ";
 
     std::cin >> NewGame;
 

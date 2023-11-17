@@ -1,5 +1,7 @@
 .idea/
 cmake-build-debug/
+cmake-build-default/
+cmake-build-release/
 main.exe/
 .vscode/tasks.json
 .vscode/launch.json
