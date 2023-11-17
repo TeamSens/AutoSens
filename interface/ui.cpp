@@ -4,6 +4,7 @@
 
 #include "ui.h"
 #include <iostream>
+
 bool ui::GetUserNeeds(){
 
     std::cout << "Hello, What game sensitivity reference would you like to use?" << std::endl;
