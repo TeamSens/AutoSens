@@ -7,7 +7,7 @@
 #define AUTOSENS_APEXLEGENDS_H
 
 class ApexLegends : public games{
-
+    ApexLegends();
 };
 
 

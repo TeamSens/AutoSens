@@ -8,7 +8,7 @@
 
 
 class CounterStrike2 : public games{
-
+    CounterStrike2();
 };
 
 

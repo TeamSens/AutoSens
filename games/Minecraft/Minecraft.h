@@ -9,7 +9,7 @@
 
 
 class Minecraft : public games {
-
+    Minecraft();
 };
 
 
