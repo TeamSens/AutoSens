@@ -5,8 +5,9 @@ void frame() {
 
     static float f = 0.0f;
     static int counter = 0;
+    bool oppened;
 
-    ImGui::Begin("AutoSens");
+    ImGui::Begin("AutoSens", &oppened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 
     ImGui::Text("This is some useful text.");
 

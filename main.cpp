@@ -50,13 +50,16 @@ int main(int, char**)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #endif
-    FrameSize framesize;
 
+    glfwWindowHint(GLFW_RESIZABLE, 1);
+
+    FrameSize framesize;
     GLFWwindow* window = glfwCreateWindow(framesize.x, framesize.y, "AutoSens", nullptr, nullptr);
     if (window == nullptr)
         return 1;
 
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    glfwSetWindowSizeLimits(window, framesize.x, framesize.y, framesize.x, framesize.y);
+
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
@@ -81,8 +84,6 @@ int main(int, char**)
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-
-        
 
         ImGui::NewFrame();
         {
