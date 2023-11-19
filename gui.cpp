@@ -1,7 +1,7 @@
 #include "gui.h"
 #include "imgui.h"
 
-void gui() {
+void interface::gui() {
 
     static float f = 0.0f;
     static int counter = 0;

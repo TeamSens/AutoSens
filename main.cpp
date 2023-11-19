@@ -53,12 +53,12 @@ int main(int, char**)
 
     glfwWindowHint(GLFW_RESIZABLE, 1);
 
-    FrameSize framesize;
-    GLFWwindow* window = glfwCreateWindow(framesize.x, framesize.y, "AutoSens", nullptr, nullptr);
+    interface frame;
+    GLFWwindow* window = glfwCreateWindow(frame.x, frame.y, "AutoSens", nullptr, nullptr);
     if (window == nullptr)
         return 1;
 
-    glfwSetWindowSizeLimits(window, framesize.x, framesize.y, framesize.x, framesize.y);
+    glfwSetWindowSizeLimits(window, frame.x, frame.y, frame.x, frame.y);
 
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
@@ -87,9 +87,9 @@ int main(int, char**)
 
         ImGui::NewFrame();
         {
-            ImGui::SetNextWindowSize((ImVec2(static_cast<float>(framesize.x), static_cast<float>(framesize.y))));
+            ImGui::SetNextWindowSize((ImVec2(static_cast<float>(frame.x), static_cast<float>(frame.y))));
             ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-            gui();
+            frame.gui();
         }
 
         // Rendering
