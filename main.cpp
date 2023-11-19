@@ -2,7 +2,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-#include "frame.h"
+#include "gui.h"
 
 #include <stdio.h>
 #define GL_SILENCE_DEPRECATION
@@ -89,7 +89,7 @@ int main(int, char**)
         {
             ImGui::SetNextWindowSize((ImVec2((float)framesize.x, (float)framesize.y)));
             ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-            frame();
+            gui();
         }
 
         // Rendering
