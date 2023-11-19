@@ -75,8 +75,8 @@ int main(int, char**)
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     // Dissable imgui.ini file
-    io.IniFilename = NULL;
-    io.LogFilename = NULL;
+    io.IniFilename = nullptr;
+    io.LogFilename = nullptr;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -87,7 +87,7 @@ int main(int, char**)
 
         ImGui::NewFrame();
         {
-            ImGui::SetNextWindowSize((ImVec2((float)framesize.x, (float)framesize.y)));
+            ImGui::SetNextWindowSize((ImVec2(static_cast<float>(framesize.x), static_cast<float>(framesize.y))));
             ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
             gui();
         }
