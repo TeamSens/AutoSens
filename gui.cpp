@@ -1,25 +1,28 @@
 #include "gui.h"
 #include "imgui.h"
 
+using namespace ImGui;
+
 void interface::gui() {
 
-    static float f = 0.0f;
-    static int counter = 0;
-    bool oppened;
+    Begin("AutoSens", &oppened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 
-    ImGui::Begin("AutoSens", &oppened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-
-
+    const char* games[] = { "Apex","cs2","Minecraft" };
     //everything that is in the frame goes inside of the brackets
     {
-        ImGui::Text("This is some useful text.");
-
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-
-        if (ImGui::Button("Button"))
-            counter++;
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
+        const float width = ImGui::GetWindowWidth();
+        const float combo_width = width * 0.25f;
+        SetNextItemWidth(combo_width);
+        Combo("Select Current Game", &currentGame, games, numberOfGames);
+        SetNextItemWidth(combo_width);
+        Combo("Select Game to Change Sensitivity", &newGame, games, numberOfGames);
+        
+        if (currentGame == newGame) {
+            Text("Games Cannot be the Same!");
+        }
+        else if (Button("Config My Sens!")) {
+            
+        }
     }
 
 
