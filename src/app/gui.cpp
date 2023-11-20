@@ -1,6 +1,10 @@
 #include "gui.h"
 #include "imgui.h"
 
+#include "games\minecraft.h"
+#include "games\apex_legends.h"
+#include "games\counter_strike2.h"
+
 using namespace ImGui;
 
 void interface::gui() {
