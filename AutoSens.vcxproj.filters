@@ -18,87 +18,66 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_demo.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_draw.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_impl_glfw.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_impl_opengl3.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_tables.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\libs\imgui\imgui_widgets.cpp">
+    <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\gui.cpp">
+    <ClCompile Include="src\autosens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\games\minecraft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\games\apex_legends.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\games\counter_strike2.cpp">
+    <ClCompile Include="src\components.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\libs\imgui\imconfig.h">
+    <ClInclude Include="Dependencies\imgui\imconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imgui.h">
+    <ClInclude Include="Dependencies\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imgui_impl_glfw.h">
+    <ClInclude Include="Dependencies\imgui\imgui_impl_glfw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imgui_impl_opengl3.h">
+    <ClInclude Include="Dependencies\imgui\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imgui_impl_opengl3_loader.h">
+    <ClInclude Include="Dependencies\imgui\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imgui_internal.h">
+    <ClInclude Include="Dependencies\imgui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imstb_rectpack.h">
+    <ClInclude Include="Dependencies\imgui\imstb_rectpack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imstb_textedit.h">
+    <ClInclude Include="Dependencies\imgui\imstb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\imgui\imstb_truetype.h">
+    <ClInclude Include="Dependencies\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\app\gui.h">
+    <ClInclude Include="src\autosens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\libs\glfw\include\GLFW\glfw3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\libs\glfw\include\GLFW\glfw3native.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\games\minecraft.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\games\apex_legends.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\games\counter_strike2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\app\games\game.h">
+    <ClInclude Include="src\components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
