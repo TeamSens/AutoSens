@@ -18,6 +18,7 @@ void AutoSens::MainLoop() {
 
 	// Remove .ini file
 	io.IniFilename = nullptr;
+	io.LogFilename = nullptr;
 
 	// Main loop
 	while (!glfwWindowShouldClose(window)) {
