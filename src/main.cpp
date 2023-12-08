@@ -1,9 +1,5 @@
-#include <d3d9.h>
-#include "imgui.h"
-#include "imgui_impl_dx9.h"
-#include "imgui_impl_win32.h"
-#include "components.h"
 #include "autosens.h"
+#include <Windows.h>
 
 HWND hwnd;
 Globals globals;
@@ -12,27 +8,63 @@ Apex apex;
 Minecraft mc;
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
+bool dragging = false;
+int dragStartX, dragStartY;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
-        return true;
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+		return true;
 
-    switch (msg) {
-    case WM_SIZE:
-        if (wParam != SIZE_MINIMIZED) {
-            ImGui_ImplDX9_InvalidateDeviceObjects();
-            // Handle resizing if needed
-        }
-        return 0;
-    case WM_SYSCOMMAND:
-        if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
-            return 0;
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-    }
-    return DefWindowProc(hWnd, msg, wParam, lParam);
+	switch (msg) {
+	case WM_SIZE:
+		if (wParam != SIZE_MINIMIZED) {
+			ImGui_ImplDX9_InvalidateDeviceObjects();
+			// Handle resizing if needed
+		}
+		return 0;
+	case WM_SYSCOMMAND:
+		if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
+			return 0;
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+	case WM_NCHITTEST:
+		// Allow dragging of the window by treating the client area as the draggable region
+		return (LRESULT)HTCLIENT;
+	case WM_MOUSEMOVE:
+		// Handle window dragging here if needed
+		// Example:
+		if (wParam == MK_LBUTTON) {
+			// Use MAKEPOINTS to extract x and y coordinates
+			const auto points = MAKEPOINTS(lParam);
+			int xPos = points.x;
+			int yPos = points.y;
+
+			if (!dragging) {
+				// Calculate the initial cursor position when dragging starts
+				dragStartX = xPos;
+				dragStartY = yPos;
+				dragging = true;
+			}
+
+			// Calculate the offset between the current cursor position and the initial position
+			int offsetX = xPos - dragStartX;
+			int offsetY = yPos - dragStartY;
+
+			// Use GetWindowRect to get the current window position and size
+			RECT windowRect;
+			if (GetWindowRect(hWnd, &windowRect)) {
+				// Update the window position during dragging
+				::SetWindowPos(hWnd, NULL, windowRect.left + offsetX, windowRect.top + offsetY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+			}
+		}
+		else {
+			// Reset dragging state when the left mouse button is not held
+			dragging = false;
+		}
+		return 0;
+	}
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 HRESULT InitDirectX(HWND hWnd, IDirect3DDevice9** ppDevice) {
@@ -56,78 +88,83 @@ HRESULT InitDirectX(HWND hWnd, IDirect3DDevice9** ppDevice) {
 }
 
 int main() {
-    // Create a Win32 window
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, "ImGui Example", NULL };
-    ::RegisterClassEx(&wc);
-    hwnd = ::CreateWindow(wc.lpszClassName, "AutoSens", WS_OVERLAPPEDWINDOW, 100, 100, 563, 335, NULL, NULL, wc.hInstance, NULL);
+	// Create a Win32 window with the desired styles
+	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, "ImGui Example", NULL };
+	::RegisterClassEx(&wc);
 
-    // Initialize DirectX
-    IDirect3DDevice9* pDevice = nullptr;
-    if (FAILED(InitDirectX(hwnd, &pDevice))) {
-        return 1;
-    }
+	// Specify WS_POPUP style to create a borderless window
+	hwnd = ::CreateWindow(wc.lpszClassName, "AutoSens", WS_POPUP, 100, 100, 563, 335, NULL, NULL, wc.hInstance, NULL);
 
-    // Initialize ImGui
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    ImGui_ImplWin32_Init(hwnd);
-    ImGui_ImplDX9_Init(pDevice);
+	// Set window style to not resizable
+	::SetWindowLong(hwnd, GWL_STYLE, ::GetWindowLong(hwnd, GWL_STYLE) & ~WS_SIZEBOX);
 
-    // Remove .ini file
-    io.IniFilename = nullptr;
-    io.LogFilename = nullptr;
+	// Set window position and size
+	::SetWindowPos(hwnd, HWND_TOP, 100, 100, 563, 335, SWP_NOZORDER | SWP_FRAMECHANGED);
 
-    // Show the window
-    ::ShowWindow(hwnd, SW_SHOWDEFAULT);
-    ::UpdateWindow(hwnd);
+	// Initialize DirectX
+	IDirect3DDevice9* pDevice = nullptr;
+	if (FAILED(InitDirectX(hwnd, &pDevice))) {
+		return 1;
+	}
 
-    // Main loop
-    MSG msg;
-    ZeroMemory(&msg, sizeof(msg));
-    while (msg.message != WM_QUIT) {
-        if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-            continue;
-        }
+	// Initialize ImGui
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	ImGui_ImplWin32_Init(hwnd);
+	ImGui_ImplDX9_Init(pDevice);
 
-        ImGui_ImplDX9_NewFrame();
-        ImGui_ImplWin32_NewFrame();
-        ImGui::NewFrame();
+	// Remove .ini file
+	io.IniFilename = nullptr;
+	io.LogFilename = nullptr;
 
-        // Your ImGui content
-		// Set the ImGui window to fill up the full GLFW window, disable the resize grip, disable title bar, and prevent collapse
+	// Show the window
+	::ShowWindow(hwnd, SW_SHOWDEFAULT);
+	::UpdateWindow(hwnd);
+
+	// Main loop
+	MSG msg;
+	ZeroMemory(&msg, sizeof(msg));
+	while (msg.message != WM_QUIT) {
+		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+			continue;
+		}
+
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+
+		// Your ImGui content
 		ImGui::SetNextWindowPos(ImVec2(0, 0));
 		ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y));
 		ImGui::Begin("##window1", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
-        
-        AutoSens::MainLoop();
 
+		AutoSens::MainLoop();
 
 		ImGui::End();
 
+		ImGui::Render();
+		pDevice->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_ARGB(255, 0, 0, 0), 1.0f, 0);
+		pDevice->BeginScene();
 
-        ImGui::Render();
-        pDevice->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_ARGB(255, 0, 0, 0), 1.0f, 0);
-        pDevice->BeginScene();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 
-        ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+		pDevice->EndScene();
+		pDevice->Present(NULL, NULL, NULL, NULL);
+	}
 
-        pDevice->EndScene();
-        pDevice->Present(NULL, NULL, NULL, NULL);
-    }
+	// Cleanup
+	ImGui_ImplDX9_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 
-    // Cleanup
-    ImGui_ImplDX9_Shutdown();
-    ImGui_ImplWin32_Shutdown();
-    ImGui::DestroyContext();
+	if (pDevice != nullptr)
+		pDevice->Release();
 
-    if (pDevice != nullptr)
-        pDevice->Release();
+	// Cleanup the window
+	::DestroyWindow(hwnd);
+	::UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-    // Cleanup the window
-    ::DestroyWindow(hwnd);
-    ::UnregisterClass(wc.lpszClassName, wc.hInstance);
-
-    return 0;
+	return 0;
 }
