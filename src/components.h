@@ -2,7 +2,15 @@
 #define COMPONENTS_H
 
 #include <Windows.h>
+class Globals
+{
+public:
+	const char* games[4] = {"Apex", "CS2", "Minecraft"};
+	int SelectedGame1 = 0;
+	int SelectedGame2 = 0;
+	int gui = 1;
 
+};
 class Game {
 public:
 	float sensitivity = 1.0f;
