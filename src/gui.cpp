@@ -49,7 +49,6 @@ LRESULT CALLBACK WindowProcess(HWND window, UINT message, WPARAM wParam, LPARAM 
 	return DefWindowProc(window, message, wParam, lParam);
 }
 
-
 void gui::CreateHWindow(const char* windowName, const char* className) noexcept {
 
 	windowClass.cbSize = sizeof(WNDCLASSEXA);
