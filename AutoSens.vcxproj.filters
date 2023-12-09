@@ -39,10 +39,10 @@
     <ClCompile Include="api\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\autosens.cpp">
+    <ClCompile Include="src\gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\components.cpp">
+    <ClCompile Include="src\autosens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClInclude Include="api\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\autosens.h">
+    <ClInclude Include="src\gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\components.h">
+    <ClInclude Include="src\autosens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

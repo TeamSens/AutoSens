@@ -1,17 +1,7 @@
-#ifndef AUTOSENS_H
-#define AUTOSENS_H
+#pragma once
 
-#include <d3d9.h>
-#include "imgui.h"
-#include "imgui_impl_dx9.h"
-#include "imgui_impl_win32.h"
-#include "components.h"
+namespace AutoSens
+{
+	void mainloop();
+}
 
-
-
-namespace AutoSens {
-
-	void MainLoop();
-};
-
-#endif // AUTOSENS_H
