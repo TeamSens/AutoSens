@@ -139,8 +139,6 @@ void gui::CreateImGui() noexcept
 	io.IniFilename = nullptr;
 	io.LogFilename = nullptr;
 
-	io.Fonts->AddFontFromMemoryTTF(font_roboto, sizeof(font_roboto), 16.0f);
-
 	ImGui::StyleColorsDark();
 
 	ImGui_ImplWin32_Init(window);
@@ -164,6 +162,7 @@ void gui::BeginRender() noexcept
 		if (message.message == WM_QUIT)
 		{
 			gui::isRunning = false;
+			return;
 		}
 	}
 
