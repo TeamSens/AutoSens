@@ -228,6 +228,7 @@
     <ClInclude Include="api\imgui\imstb_textedit.h" />
     <ClInclude Include="api\imgui\imstb_truetype.h" />
     <ClInclude Include="src\autosens.h" />
+    <ClInclude Include="src\font.h" />
     <ClInclude Include="src\gui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

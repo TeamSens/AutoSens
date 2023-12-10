@@ -1,9 +1,7 @@
 #include "gui.h"
 
-// Forward declaration
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 
-// Window procedure
 LRESULT CALLBACK WindowProcess(HWND window, UINT message, WPARAM wParam, LPARAM lParam) {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, wParam, lParam))
 		return true;
@@ -35,8 +33,8 @@ LRESULT CALLBACK WindowProcess(HWND window, UINT message, WPARAM wParam, LPARAM 
 			rect.left += points.x - gui::position.x;
 			rect.top += points.y - gui::position.y;
 
-			if (gui::position.x >= 0 && 
-				gui::position.x <= gui::WIDTH && 
+			if (gui::position.x >= 0 &&
+				gui::position.x <= gui::WIDTH &&
 				gui::position.y >= 0 &&
 				gui::position.y <= 19)
 
@@ -66,7 +64,7 @@ void gui::CreateHWindow(const char* windowName, const char* className) noexcept 
 
 	RegisterClassExA(&windowClass);
 
-	window = CreateWindowA(className, windowName, WS_POPUP, 100,100, WIDTH, HEIGHT, 0, 0, windowClass.hInstance, 0);
+	window = CreateWindowA(className, windowName, WS_POPUP, 100, 100, WIDTH, HEIGHT, 0, 0, windowClass.hInstance, 0);
 
 	ShowWindow(window, SW_SHOWDEFAULT);
 	UpdateWindow(window);
@@ -139,6 +137,9 @@ void gui::CreateImGui() noexcept
 	ImGuiIO& io = ::ImGui::GetIO();
 
 	io.IniFilename = nullptr;
+	io.LogFilename = nullptr;
+
+	io.Fonts->AddFontFromMemoryTTF(font_roboto, sizeof(font_roboto), 16.0f);
 
 	ImGui::StyleColorsDark();
 
@@ -152,13 +153,18 @@ void gui::DestroyImGui() noexcept
 	ImGui::DestroyContext();
 }
 
-void gui::BeginRender() noexcept {
-
+void gui::BeginRender() noexcept
+{
 	MSG message;
 	while (PeekMessage(&message, 0, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&message);
 		DispatchMessage(&message);
+
+		if (message.message == WM_QUIT)
+		{
+			gui::isRunning = false;
+		}
 	}
 
 	ImGui_ImplDX9_NewFrame();
@@ -195,7 +201,7 @@ void gui::Render() noexcept {
 	ImGui::SetNextWindowSize({ WIDTH, HEIGHT });
 	ImGui::Begin(
 		"Test",
-		&exit,
+		&isRunning,
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
@@ -205,3 +211,4 @@ void gui::Render() noexcept {
 
 	ImGui::End();
 }
+

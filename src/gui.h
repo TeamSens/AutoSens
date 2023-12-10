@@ -1,16 +1,14 @@
-#pragma once
-
 #include <d3d9.h>
 #include "imgui.h"
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
-
+#include "font.h"
 namespace gui {
 
 	constexpr int WIDTH = 500;
 	constexpr int HEIGHT = 300;
 
-	inline bool exit = true;
+	inline bool isRunning = true;
 	inline HWND window = nullptr;
 	inline WNDCLASSEXA windowClass{};
 	inline POINTS position = {};

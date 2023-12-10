@@ -7,7 +7,7 @@ void AutoSens::mainloop()
 	gui::CreateDevice();
 	gui::CreateImGui();
 
-	while (gui::exit)
+	while (gui::isRunning)
 	{
 		gui::BeginRender();
 		gui::Render();
