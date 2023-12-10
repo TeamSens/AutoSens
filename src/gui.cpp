@@ -38,8 +38,7 @@ LRESULT CALLBACK WindowProcess(HWND window, UINT message, WPARAM wParam, LPARAM 
 				gui::position.y >= 0 &&
 				gui::position.y <= 19)
 
-				SetWindowPos(gui::window, HWND_TOPMOST, rect.left, rect.top, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE |
-					SWP_NOZORDER);
+				SetWindowPos(gui::window, HWND_TOPMOST, rect.left, rect.top, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOZORDER);
 		}
 		return 0;
 	}
