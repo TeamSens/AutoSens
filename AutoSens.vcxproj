@@ -215,10 +215,12 @@
     <ClCompile Include="api\imgui\imgui_tables.cpp" />
     <ClCompile Include="api\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\autosens.cpp" />
+    <ClCompile Include="src\components.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api\Fonts\roboto.h" />
     <ClInclude Include="api\imgui\imconfig.h" />
     <ClInclude Include="api\imgui\imgui.h" />
     <ClInclude Include="api\imgui\imgui_impl_dx9.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="api\imgui\imstb_textedit.h" />
     <ClInclude Include="api\imgui\imstb_truetype.h" />
     <ClInclude Include="src\autosens.h" />
+    <ClInclude Include="src\components.h" />
     <ClInclude Include="src\gui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

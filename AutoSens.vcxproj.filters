@@ -45,6 +45,9 @@
     <ClCompile Include="src\autosens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\components.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api\imgui\imconfig.h">
@@ -75,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\autosens.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\Fonts\roboto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

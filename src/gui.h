@@ -2,12 +2,13 @@
 #include "imgui.h"
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
+#include "components.h"
+//#include "../Fonts/roboto.h"
 
 namespace gui {
 
-	constexpr int WIDTH = 500;
-	constexpr int HEIGHT = 300;
-
+	constexpr int WIDTH = 549;
+	constexpr int HEIGHT = 305;
 	inline bool isRunning = true;
 	inline HWND window = nullptr;
 	inline WNDCLASSEXA windowClass{};
