@@ -1,4 +1,6 @@
 #include "gui.h"
+#include "../Fonts/roboto.h" // had to stay in here, would error otherwise idek
+
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -142,6 +144,10 @@ void gui::CreateImGui() noexcept
 
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(device);
+	// u can load these from a file, but im just grabbing it from a decompiled TTF so no downloading is needed.
+	ImFontConfig font_cfg;
+	font_cfg.FontDataOwnedByAtlas = false;
+	ImFont* font1 = io.Fonts->AddFontFromMemoryTTF(robotoRaw,sizeof(robotoRaw),16,&font_cfg);
 }
 void gui::DestroyImGui() noexcept
 {
@@ -168,6 +174,7 @@ void gui::BeginRender() noexcept
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+
 }
 
 void gui::EndRender() noexcept {
@@ -203,9 +210,108 @@ void gui::Render() noexcept {
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_NoMove);
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoTitleBar);
 
-	ImGui::Text("Hello, ImGui!");
+	Globals globals;
+	Minecraft mc;
+	Apex apex;
+	CounterStrike2 cs2;
+
+	switch (globals.gui)
+	{
+	case 1:
+		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
+		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
+		ImGui::PushItemWidth(240.f);
+		ImGui::ListBox("##gameslist1", &globals.selectedGameFrom, globals.games, 3);
+		ImGui::PopItemWidth();
+		ImGui::EndChild();
+
+		ImGui::SetCursorPos({ 265.f,75.f });
+		ImGui::Text("to");
+
+		ImGui::SetCursorPos({ 292.f,5.f });
+		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
+		ImGui::PushItemWidth(240.f);
+		ImGui::ListBox("##gameslist2", &globals.selectedGameTo, globals.games, 3);
+		ImGui::PopItemWidth();
+		ImGui::EndChild();
+
+		ImGui::SetCursorPos({ 5.f, 225.f });
+		if (ImGui::Button("Convert", { 537.f, 50.f })) {
+			if (globals.selectedGameFrom != globals.selectedGameTo)
+				globals.gui = 2;
+		}
+		break;
+	case 2:
+		// I didnt know if there was a better way to do this part, idrc
+		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
+		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
+		switch (globals.selectedGameFrom)
+		{
+		case 0:
+			if (ImGui::Button("Change CFG file path")) {
+
+				apex.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", apex.cfgPath);
+
+			break;
+		case 1:
+			if (ImGui::Button("Change CFG file path")) {
+
+				cs2.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", cs2.cfgPath);
+			break;
+		case 2:
+			if (ImGui::Button("Change CFG file path")) {
+
+				mc.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", mc.cfgPath);
+			break;
+		}
+		ImGui::EndChild();
+
+		ImGui::SetCursorPos({ 292.f,5.f });
+		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
+		switch (globals.selectedGameTo)
+		{
+		case 0:
+			if (ImGui::Button("Change CFG file path")) {
+
+				apex.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", apex.cfgPath);
+
+			break;
+		case 1:
+			if (ImGui::Button("Change CFG file path")) {
+
+				cs2.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", cs2.cfgPath);
+			break;
+		case 2:
+			if (ImGui::Button("Change CFG file path")) {
+
+				mc.SetCfgPath();
+			}
+			ImGui::Text("Chosen File Path: %s", mc.cfgPath);
+			break;
+		}
+		ImGui::EndChild();
+
+		ImGui::SetCursorPos({ 5.f, 225.f });
+		if (ImGui::Button("Convert", { 537.f, 50.f }))
+		{
+			// convert logic
+		}
+
+		break; // breaka out of case 2
+	}
 
 	ImGui::End();
 }
