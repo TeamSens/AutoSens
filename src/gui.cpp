@@ -210,8 +210,7 @@ void gui::Render() noexcept {
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
 		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_NoMove |
-		ImGuiWindowFlags_NoTitleBar);
+		ImGuiWindowFlags_NoMove);
 
 	Globals globals;
 	Minecraft mc;
@@ -221,24 +220,28 @@ void gui::Render() noexcept {
 	switch (globals.gui)
 	{
 	case 1:
-		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
+
+		ImGui::SetCursorPos({ 5.f,25.f }); // child for the game you are converting from
+
 		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
 		ImGui::PushItemWidth(240.f);
 		ImGui::ListBox("##gameslist1", &globals.selectedGameFrom, globals.games, 3);
 		ImGui::PopItemWidth();
 		ImGui::EndChild();
 
-		ImGui::SetCursorPos({ 265.f,75.f });
+		ImGui::SetCursorPos({ 267.f,115.f });
+
 		ImGui::Text("to");
 
-		ImGui::SetCursorPos({ 292.f,5.f });
+		ImGui::SetCursorPos({ 292.f,25.f });
+
 		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
 		ImGui::PushItemWidth(240.f);
 		ImGui::ListBox("##gameslist2", &globals.selectedGameTo, globals.games, 3);
 		ImGui::PopItemWidth();
 		ImGui::EndChild();
 
-		ImGui::SetCursorPos({ 5.f, 225.f });
+		ImGui::SetCursorPos({ 5.f, 245.f });
 		if (ImGui::Button("Convert", { 537.f, 50.f })) {
 			if (globals.selectedGameFrom != globals.selectedGameTo)
 				globals.gui = 2;
@@ -246,7 +249,7 @@ void gui::Render() noexcept {
 		break;
 	case 2:
 		// I didnt know if there was a better way to do this part, idrc
-		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
+		ImGui::SetCursorPos({ 5.f,25.f }); // child for the game you are converting from
 		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
 		switch (globals.selectedGameFrom)
 		{
@@ -275,7 +278,7 @@ void gui::Render() noexcept {
 		}
 		ImGui::EndChild();
 
-		ImGui::SetCursorPos({ 292.f,5.f });
+		ImGui::SetCursorPos({ 292.f,25.f });
 		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
 		switch (globals.selectedGameTo)
 		{
@@ -304,7 +307,7 @@ void gui::Render() noexcept {
 		}
 		ImGui::EndChild();
 
-		ImGui::SetCursorPos({ 5.f, 225.f });
+		ImGui::SetCursorPos({ 5.f, 245.f });
 		if (ImGui::Button("Convert", { 537.f, 50.f }))
 		{
 			// convert logic
@@ -315,4 +318,3 @@ void gui::Render() noexcept {
 
 	ImGui::End();
 }
-
