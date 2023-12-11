@@ -222,7 +222,7 @@ void gui::Render() noexcept {
 		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
 		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
 		ImGui::PushItemWidth(240.f);
-		ImGui::ListBox("##gameslist1", &globals.SelectedGame1, globals.games, 3);
+		ImGui::ListBox("##gameslist1", &globals.selectedGameFrom, globals.games, 3);
 		ImGui::PopItemWidth();
 		ImGui::EndChild();
 
@@ -232,13 +232,13 @@ void gui::Render() noexcept {
 		ImGui::SetCursorPos({ 292.f,5.f });
 		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
 		ImGui::PushItemWidth(240.f);
-		ImGui::ListBox("##gameslist2", &globals.SelectedGame2, globals.games, 3);
+		ImGui::ListBox("##gameslist2", &globals.selectedGameTo, globals.games, 3);
 		ImGui::PopItemWidth();
 		ImGui::EndChild();
 
 		ImGui::SetCursorPos({ 5.f, 225.f });
 		if (ImGui::Button("Convert", { 537.f, 50.f })) {
-			if (globals.SelectedGame1 != globals.SelectedGame2)
+			if (globals.selectedGameFrom != globals.selectedGameTo)
 				globals.gui = 2;
 		}
 		break;
@@ -246,7 +246,7 @@ void gui::Render() noexcept {
 		// I didnt know if there was a better way to do this part, idrc
 		ImGui::SetCursorPos({ 5.f,5.f }); // child for the game you are converting from
 		ImGui::BeginChild("##convertingfrom", { 250.f,200.f }, true);
-		switch (globals.SelectedGame1)
+		switch (globals.selectedGameFrom)
 		{
 		case 0:
 			if (ImGui::Button("Change CFG file path")) {
@@ -275,7 +275,7 @@ void gui::Render() noexcept {
 
 		ImGui::SetCursorPos({ 292.f,5.f });
 		ImGui::BeginChild("##convertingto", { 250.f,200.f }, true);
-		switch (globals.SelectedGame2)
+		switch (globals.selectedGameTo)
 		{
 		case 0:
 			if (ImGui::Button("Change CFG file path")) {

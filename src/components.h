@@ -6,8 +6,8 @@ class Globals
 {
 public:
 	const char* games[4] = { "Apex", "CS2", "Minecraft" };
-	int SelectedGame1 = 0;
-	int SelectedGame2 = 0;
+	int selectedGameFrom = 0;
+	int selectedGameTo = 0;
 	int gui = 1;
 
 };
