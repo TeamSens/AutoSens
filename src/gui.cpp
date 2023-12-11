@@ -145,7 +145,9 @@ void gui::CreateImGui() noexcept
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX9_Init(device);
 	// u can load these from a file, but im just grabbing it from a decompiled TTF so no downloading is needed.
-	ImFont* font1 = io.Fonts->AddFontFromMemoryTTF(robotoRaw,sizeof(robotoRaw),16);
+	ImFontConfig font_cfg;
+	font_cfg.FontDataOwnedByAtlas = false;
+	ImFont* font1 = io.Fonts->AddFontFromMemoryTTF(robotoRaw,sizeof(robotoRaw),16,&font_cfg);
 }
 void gui::DestroyImGui() noexcept
 {
