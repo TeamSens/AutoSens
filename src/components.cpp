@@ -20,3 +20,12 @@ void Game::SetCfgPath()
 		strcpy_s(cfgPath, sizeof(cfgPath), szFile);
 	}
 }
+
+
+float Game::toGlobalSense(Game game)
+{
+	/* My thought process here is u convert your game's sensitivity
+	to a global one, which can than be edited to all different games, 
+	this makes it so we dont need to do a bunch of ghetto math to convert
+	game to game. */
+}

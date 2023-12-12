@@ -5,17 +5,18 @@
 class Globals
 {
 public:
-	const char* games[4] = { "Apex", "CS2", "Minecraft" };
+	const char* games[3] = { "Apex", "CS2", "Minecraft" };
+	//Game* gameList[3] = { new Apex, new CounterStrike2 , new Minecraft };
 	int selectedGameFrom = 0;
 	int selectedGameTo = 0;
 	int gui = 1;
-
 };
 class Game {
 public:
 	float sensitivity = 1.0f;
 	char cfgPath[260] = "";
 	void SetCfgPath();
+	float toGlobalSense(Game game);
 };
 
 class CounterStrike2 : public Game
