@@ -3,6 +3,10 @@
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
+Globals globals;
+Minecraft mc;
+Apex apex;
+CounterStrike2 cs2;
 
 LRESULT CALLBACK WindowProcess(HWND window, UINT message, WPARAM wParam, LPARAM lParam) {
 	if (ImGui_ImplWin32_WndProcHandler(window, message, wParam, lParam))
@@ -212,10 +216,7 @@ void gui::Render() noexcept {
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_NoMove);
 
-	Globals globals;
-	Minecraft mc;
-	Apex apex;
-	CounterStrike2 cs2;
+
 
 	switch (globals.gui)
 	{
@@ -310,7 +311,7 @@ void gui::Render() noexcept {
 		ImGui::SetCursorPos({ 5.f, 245.f });
 		if (ImGui::Button("Convert", { 537.f, 50.f }))
 		{
-			// convert logic
+			
 		}
 
 		break; // breaka out of case 2
