@@ -7,7 +7,7 @@
 
 namespace gui {
 
-	constexpr int WIDTH = 549;
+	constexpr int WIDTH = 547;
 	constexpr int HEIGHT = 305;
 	inline bool isRunning = true;
 	inline HWND window = nullptr;
