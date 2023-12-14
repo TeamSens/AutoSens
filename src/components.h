@@ -1,7 +1,13 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-#include <Windows.h>
+#include <windows.h>
+#include <shobjidl.h>
+#include <shlwapi.h>
+#include <iostream>
+#include <string>
+
+#pragma comment(lib, "shlwapi.lib")
 class Globals
 {
 public:
@@ -14,14 +20,14 @@ public:
 class Game {
 public:
 	float sensitivity = 1.0f;
-	char cfgPath[260] = "";
+	std::wstring cfgPath;
 	void SetCfgPath();
-	float toGlobalSense(Game game);
 };
 
 class CounterStrike2 : public Game
 {
 public:
+	float multiplier = 0;
 private:
 
 };
@@ -29,6 +35,7 @@ private:
 class Apex : public Game
 {
 public:
+	float multiplier = 0;
 private:
 
 };
@@ -36,6 +43,8 @@ private:
 class Minecraft : public Game
 {
 public:
+	float multiplier = 0;
+	std::string pathRecomendation = "%appdata%/.minecraft/options.txt";
 private:
 
 };
